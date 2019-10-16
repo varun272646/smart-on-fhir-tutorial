@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-<body>
-<script src='./lib/js/fhir-client-v0.1.12.js'></script>
-<script>
-  FHIR.oauth2.authorize({
-    'client_id': 'b6ef3750-d019-4b2d-bcc0-cb24841b97eb',
-    'scope':  'patient/Patient.read patient/Condition.read',
-    'redirect_uri': 'https://varun272646.github.io/smart-on-fhir-tutorial/example-smart-app/index.html'
-  });
-</script>
-<div>Trying to launch.html ...</div>
-</body>
+  <body>
+    <script src='js/fhir-client.js'></script>
+    <script>
+      FHIR.oauth2.authorize({
+        'client_id': 'b6ef3750-d019-4b2d-bcc0-cb24841b97eb',
+        'scope':  'patient/Patient.read patient/Condition.read',
+        'redirect_uri': 'https://varun272646.github.io/smart-on-fhir-tutorial/example-smart-app/app.html'
+      });
+    </script>
+    <div>Trying to launch.html ...</div>
+  </body>
 </html>
+

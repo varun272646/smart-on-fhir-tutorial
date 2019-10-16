@@ -1,77 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Example FHIR App Redirected</title>
+  <head>
 
-  <script src="'./lib/js/jquery.js"></script>
-  <script src='./lib/js/fhir-client-v0.1.12.js'></script>
-
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/main.css">
-
-  <style>
-
-    html {box-sizing: border-box;}
-    *, *:before, *:after {box-sizing: inherit;}
-    footer{position:fixed; bottom:0.5vw; right:0.5vw;}
-
-  </style>
-
-
+    <script src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">       
+        
 </head>
-<body>
 
-<div id="main" class="container"></div>
+<body class="text-center">
 
-<script>
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Example FHIR App</h1>
+        <p class="lead"><br/>Click the button to try out<br><br></p>
+        <p class="lead">
+          <button class="btn btn-warning btn-large" id="login">Login</button>
+        </p>
+      </main>
+    </div>
 
-  var myApp = {}
-
+  <script>
 
   $(document).ready(function(){
 
-    getFHIR()
+    $("body").on("click", "#login", function(){
+      var iss = "https://fhir-myrecord.sandboxcerner.com/dstu2/b6ef3750-d019-4b2d-bcc0-cb24841b97eb"
+      window.location ="launch.html?iss="+iss+"&aud="
+    })
 
   })
 
-  function getFHIR(){
-    FHIR.oauth2.ready(function (fhirClient) {
-      myApp.smart = fhirClient;
-      getAllFHIR()
-    }, function(){ alert("error") })
-  }
+  </script>
 
-  function getAllFHIR(){
-
-    $("#main").html("<div class='alert alert-info'>Getting your Conditions, please be patient</div>")
-
-    $.when(
-        myApp.smart.patient.api.fetchAll({type: "Condition", query:{"category":"diagnosis"}})
-    ).then(function (data) {
-      render(data)
-    }, function(error){ console.log(error) })
-  }
-
-
-  function render(data){
-
-    console.log(data)
-
-    $("#main").html("<div class='alert alert-success'>Got your medical history, now processing ...</div>")
-
-    var toInsert = ""
-
-    _.each(data, function(val,index){
-      toInsert += "<div class='row alert'>"+val.code.text+"</div>"
-    })
-
-    $("#main").html(toInsert)
-  }
-
-
-</script>
-
-
-
-</body>
+  </body>
 </html>
